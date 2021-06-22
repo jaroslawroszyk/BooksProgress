@@ -35,25 +35,48 @@ HowManyPages enterdata()
     return p;
 }
 
+void sum()
+{
+    std::string line;
+    std::cout << "sum all pages \n";
+    std::ifstream outFile;
+    outFile.open("dane.txt", std::ios::app);
+    if (outFile.is_open())
+    {
+        while (getline(outFile, line))
+        {
+            std::cout << line << "\n";
+        }
+        outFile.close();
+    }
+    else
+    {
+        std::cout << "Unable to open file! \n";
+    }
+}
+
 void menu()
 {
     Pages enter;
     do
     {
         std::cout << "[1] Enter day and number of pages (automatic save)\n";
-        std::cout << "[3] Sum all day \n";
-        std::cout << "[4] Exit \n";
+        std::cout << "[2] Sum all day \n";
+        std::cout << "[3] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
         switch (enter)
         {
         case Pages::p_PagesDay:
         {
+            system("clear");
             enterdata();
             break;
         }
         case Pages::p_Sum:
         {
+            system("clear");
+            sum();
             break;
         }
         case Pages::p_exit:
@@ -65,4 +88,17 @@ void menu()
     } while (enter != Pages::p_exit);
 }
 
+// void EnterData()
+// {
+//     HowManyPages test;
 
+//     std::cout << "enter the day: ";
+//     std::cin >> test.date;
+//     std::cout << "how many pages: ";
+//     std::cin >> test.pages;
+// }
+
+// void show(HowManyPages show)
+// {
+//     std::cout<< show.date << " " << show.pages << "\n";
+// }
