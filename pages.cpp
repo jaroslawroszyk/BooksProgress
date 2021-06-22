@@ -65,17 +65,4 @@ void menu()
     } while (enter != Pages::p_exit);
 }
 
-// void EnterData()
-// {
-//     HowManyPages test;
 
-//     std::cout << "enter the day: ";
-//     std::cin >> test.date;
-//     std::cout << "how many pages: ";
-//     std::cin >> test.pages;
-// }
-
-// void show(HowManyPages show)
-// {
-//     std::cout<< show.date << " " << show.pages << "\n";
-// }

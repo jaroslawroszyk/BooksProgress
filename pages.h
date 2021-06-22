@@ -10,10 +10,9 @@ struct HowManyPages
     HowManyPages enterdata();
     HowManyPages SaveToFile(HowManyPages savedate);
 
-    // HowManyPages show();
 };
 
-// void show(HowManyPages show);
+
 
 enum class Pages
 {
@@ -25,4 +24,4 @@ enum class Pages
 void menu();
 std::istream &operator>>(std::istream &in, Pages &enter);
 
-// void EnterData();
+
