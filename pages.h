@@ -2,8 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-//TODO: ZMIENIC PAGES NA INT!
-//TODO: Pocztac o tym jak odpalic program przy starcie sys linux/ windows (do readme tez sie przyda)
+
 enum class Pages
 {
     p_PagesDay = 1,
