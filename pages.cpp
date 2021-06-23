@@ -19,7 +19,7 @@ HowManyPages SaveToFile(HowManyPages savedate)
         std::cout << "Wrote!\n";
     }
     save.close();
-    return savedate; //zwroc savedata
+    return savedate; 
 }
 
 // int extract_pages(const std::string &line)
