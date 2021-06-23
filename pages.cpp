@@ -56,8 +56,7 @@ HowManyPages enterdata()
     std::cin >> p.date;
     std::cout << "how many pages: ";
     std::cin >> p.pages;
-    // show(p);
-    sum(p);
+
     SaveToFile(p);
     return p;
 }
