@@ -16,7 +16,7 @@ HowManyPages SaveToFile(HowManyPages savedate)
     if (save.good())
     {
         save << "Date: " << savedate.date << ", number of pages: " << savedate.pages << '\n';
-        std::cout << "Wrote!\n";
+        std::cout << "Data has been saved !\n";
     }
     save.close();
     return savedate;
@@ -62,7 +62,6 @@ void sum()
 
     //secound  version:
     //     auto file = std::ifstream("dane.txt");
-    // // TODO: Error open file..
     // int sum = 0;
     // for(;;) {
     //     file.ignore(std::numeric_limits<std::streamsize>::max(), ':');
