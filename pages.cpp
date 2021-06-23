@@ -11,8 +11,6 @@ std::istream &operator>>(std::istream &in, Pages &enter)
 
 HowManyPages SaveToFile(HowManyPages savedate)
 {
-    int sum;
-    HowManyPages t; // wyjeb
     std::ofstream save;
     save.open("dane.txt", std::ios::app);
     if (save.good())
@@ -21,7 +19,7 @@ HowManyPages SaveToFile(HowManyPages savedate)
         std::cout << "Wrote!\n";
     }
     save.close();
-    return t; //zwroc savedata
+    return savedate; //zwroc savedata
 }
 
 // int extract_pages(const std::string &line)
