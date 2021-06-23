@@ -1,5 +1,6 @@
 #include "pages.h"
 #include <fstream>
+#include <string>
 
 std::istream &operator>>(std::istream &in, Pages &enter)
 {
@@ -10,6 +11,7 @@ std::istream &operator>>(std::istream &in, Pages &enter)
 
 HowManyPages SaveToFile(HowManyPages savedate)
 {
+    int sum;
     HowManyPages t; // wyjeb
     std::ofstream save;
     save.open("dane.txt", std::ios::app);
@@ -18,50 +20,74 @@ HowManyPages SaveToFile(HowManyPages savedate)
         save << "Date: " << savedate.date << ", number of pages: " << savedate.pages << '\n';
         std::cout << "Wrote!\n";
     }
-
     save.close();
     return t; //zwroc savedata
 }
 
-void sum(HowManyPages k)
+// int extract_pages(const std::string &line)
+// {
+//     std::string number;
+//     for (auto iter{crbegin(line)}; iter != crend(line); ++iter)
+//     {
+//         if (!isdigit(*iter))
+//             break;
+//         number += *iter;
+//     }
+//     return stoi(std::string{rbegin(number), rend(number)});
+// }
+
+void sum()
 {
-    // HowManyPages xd;
-    int suma;
+    //first version
+    HowManyPages p;
     std::string line;
     std::cout << "sum all pages \n";
     std::ifstream outFile;
-    outFile.open("dane.txt", std::ios::app | std::ios::in);
+    outFile.open("dane.txt", std::ios::app);
     if (outFile.is_open())
     {
-        // while (getline(outFile, line))
-        while(outFile >> line)
+        while (getline(outFile, line))
         {
-            suma += k.pages;
-            
+            std::string token1 = line.substr(line.find(",") + 1, line.length() - 1);
+            std::string token2 = token1.substr(token1.find(":") + 1, token1.length() - 1);
+            p.pages = std::stoi(token2);
+            p.suma += p.pages;
         }
-        std::cout << suma << "\n";
+
         outFile.close();
     }
     else
     {
         std::cout << "Unable to open file! \n";
     }
+    std::cout << "Sum of pages : " << p.suma << std::endl;
 
+    //secound  version:
+    //     auto file = std::ifstream("dane.txt");
+    // // TODO: Error open file..
+    // int sum = 0;
+    // for(;;) {
+    //     file.ignore(std::numeric_limits<std::streamsize>::max(), ':');
+    //     file.ignore(std::numeric_limits<std::streamsize>::max(), ':');
+    //     if(file.eof() || file.bad()) {
+    //         break;
+    //     }
+    //     int i;
+    //     file >> i;
+    //     sum += i;
+    // }
+    // std::cout << "sum = " << sum << '\n';
 }
 
-HowManyPages enterdata()
+void enterdata()
 {
     HowManyPages p;
     std::cout << "enter the day: ";
     std::cin >> p.date;
     std::cout << "how many pages: ";
     std::cin >> p.pages;
-
     SaveToFile(p);
-    return p;
 }
-
-
 
 void menu()
 {
@@ -84,12 +110,18 @@ void menu()
         case Pages::p_Sum:
         {
             system("clear");
-            // sum();
+            sum();
             break;
         }
         case Pages::p_exit:
         {
             std::cout << "See you tomorrow \n";
+            break;
+        }
+        default:
+        {
+            system("clear");
+            std::cout << "nope \n";
             break;
         }
         }
