@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <limits>
 
 enum class Pages
 {
@@ -14,16 +15,13 @@ struct HowManyPages
 {
     std::string date;
     int pages = 0;
-    int suma=0;
-    HowManyPages enterdata();
+    int suma = 0;
+    void enterdata();
     HowManyPages SaveToFile(HowManyPages savedate);
-    int sum(HowManyPages k);
-    // HowManyPages show();
 };
-// # g++ main.cpp pages.cpp -o Howmany
-// void sum(); //a function that sums up all the page counts in a file
 
+void sum();
 void menu();
 std::istream &operator>>(std::istream &in, Pages &enter);
 
-// void EnterData();
+// int extract_pages(const std::string &line);
