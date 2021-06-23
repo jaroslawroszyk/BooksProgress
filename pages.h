@@ -4,6 +4,8 @@
 #include <fstream>
 #include <limits>
 
+//TODO: Write the title and write to the file e.g. language c ++ .. do jezyk cpp.txt, unfuckyourself do unfuckyourself.txt
+
 enum class Pages
 {
     p_PagesDay = 1,
