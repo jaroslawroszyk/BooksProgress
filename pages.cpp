@@ -10,7 +10,7 @@ std::istream &operator>>(std::istream &in, Pages &enter)
 
 HowManyPages SaveToFile(HowManyPages savedate)
 {
-    HowManyPages t;
+    HowManyPages t; // wyjeb
     std::ofstream save;
     save.open("dane.txt", std::ios::app);
     if (save.good())
@@ -20,7 +20,33 @@ HowManyPages SaveToFile(HowManyPages savedate)
     }
 
     save.close();
-    return t;
+    return t; //zwroc savedata
+}
+
+void sum(HowManyPages k)
+{
+    // HowManyPages xd;
+    int suma;
+    std::string line;
+    std::cout << "sum all pages \n";
+    std::ifstream outFile;
+    outFile.open("dane.txt", std::ios::app | std::ios::in);
+    if (outFile.is_open())
+    {
+        // while (getline(outFile, line))
+        while(outFile >> line)
+        {
+            suma += k.pages;
+            
+        }
+        std::cout << suma << "\n";
+        outFile.close();
+    }
+    else
+    {
+        std::cout << "Unable to open file! \n";
+    }
+
 }
 
 HowManyPages enterdata()
@@ -31,29 +57,12 @@ HowManyPages enterdata()
     std::cout << "how many pages: ";
     std::cin >> p.pages;
     // show(p);
+    sum(p);
     SaveToFile(p);
     return p;
 }
 
-void sum()
-{
-    std::string line;
-    std::cout << "sum all pages \n";
-    std::ifstream outFile;
-    outFile.open("dane.txt", std::ios::app);
-    if (outFile.is_open())
-    {
-        while (getline(outFile, line))
-        {
-            std::cout << line << "\n";
-        }
-        outFile.close();
-    }
-    else
-    {
-        std::cout << "Unable to open file! \n";
-    }
-}
+
 
 void menu()
 {
@@ -76,7 +85,7 @@ void menu()
         case Pages::p_Sum:
         {
             system("clear");
-            sum();
+            // sum();
             break;
         }
         case Pages::p_exit:
