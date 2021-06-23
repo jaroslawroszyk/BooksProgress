@@ -24,6 +24,6 @@ struct HowManyPages
 
 void sum();
 void menu();
-std::istream &operator>>(std::istream &in, Pages &enter);
+//std::istream &operator>>(std::istream &in, Pages &enter);
 
 // int extract_pages(const std::string &line);
