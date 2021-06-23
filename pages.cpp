@@ -16,8 +16,8 @@ HowManyPages SaveToFile(HowManyPages savedate)
     if (save.good())
     {
         save << "Date: " << savedate.date << ", number of pages: " << savedate.pages << '\n';
-        std::cout << "Data has been saved !\n";
     }
+    std::cout << "Data has been saved !\n";
     save.close();
     return savedate;
 }
@@ -79,8 +79,8 @@ void sum()
 void enterdata()
 {
     HowManyPages p;
-    std::cout << "enter the day: ";
-    std::cin >> p.date;
+    //    std::cout << "enter the day: ";
+    //    std::cin >> p.date;
     std::cout << "how many pages: ";
     std::cin >> p.pages;
     SaveToFile(p);
@@ -93,6 +93,7 @@ void menu()
     {
         std::cout << "[1] Enter day and number of pages (automatic save)\n";
         std::cout << "[2] Sum all day \n";
+        // std::cout << "[3] Enter book \n";
         std::cout << "[3] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
