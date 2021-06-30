@@ -11,5 +11,5 @@ make
 
 ## Execute
 ```
-<pre>./howamanypages</pre>
+./howamanypages
 ```
