@@ -1,9 +1,15 @@
 # -how-many-pages-per-day
 
-
-
-## Compile
-
+## Build
+ Build requires cmake 3.0+
 ```
-./run.sh
+mkdir build
+cd build
+cmake ..
+make 
+```
+
+## Execute
+```
+<pre>./howamanypages</pre>
 ```
