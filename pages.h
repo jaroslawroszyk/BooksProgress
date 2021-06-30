@@ -4,8 +4,6 @@
 #include <fstream>
 #include <limits>
 
-//TODO: Write the title and write to the file e.g. language c ++ .. do jezyk cpp.txt, unfuckyourself do unfuckyourself.txt
-
 enum class Pages
 {
     p_PagesDay = 1,
@@ -26,4 +24,4 @@ void sum();
 void menu();
 std::istream &operator>>(std::istream &in, Pages &enter);
 
-// int extract_pages(const std::string &line);
+// int extract_pages(const std::string &line); 
