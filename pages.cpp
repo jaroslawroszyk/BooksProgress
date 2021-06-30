@@ -60,7 +60,7 @@ void sum()
     }
     std::cout << "Sum of pages : " << p.suma << std::endl;
 
-    //secound  version:
+    //secound  version: idk which is better
     //     auto file = std::ifstream("dane.txt");
     // int sum = 0;
     // for(;;) {
@@ -76,11 +76,25 @@ void sum()
     // std::cout << "sum = " << sum << '\n';
 }
 
+int calc()
+{
+    int startingPage = 0;
+    int endPage = 0;
+    int calculate = 0;
+    std::cout << "Enter the starting page: ";
+    std::cin >> startingPage;
+    std::cout << "Enter the last page you read today: ";
+    std::cin >> endPage;
+    calculate = endPage - startingPage;
+    std::cout << "you have read: ";
+    return calculate;
+}
+
 void enterdata()
 {
     HowManyPages p;
-    //    std::cout << "enter the day: ";
-    //    std::cin >> p.date;
+    std::cout << "enter the day: ";
+    std::cin >> p.date;
     std::cout << "how many pages: ";
     std::cin >> p.pages;
     SaveToFile(p);
@@ -93,8 +107,8 @@ void menu()
     {
         std::cout << "[1] Enter day and number of pages (automatic save)\n";
         std::cout << "[2] Sum all day \n";
-        // std::cout << "[3] Enter book \n";
-        std::cout << "[3] Exit \n";
+        std::cout << "[3] Count how many pages you have read \n";
+        std::cout << "[4] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
         switch (enter)
@@ -109,6 +123,12 @@ void menu()
         {
             system("clear");
             sum();
+            break;
+        }
+        case Pages::p_Calculate:
+        {
+            system("clear");
+            std::cout << calc() << " pages\n";
             break;
         }
         case Pages::p_exit:

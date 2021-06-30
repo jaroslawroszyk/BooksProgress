@@ -8,7 +8,8 @@ enum class Pages
 {
     p_PagesDay = 1,
     p_Sum,
-    p_exit = 3,
+    p_Calculate,
+    p_exit = 4,
 };
 
 struct HowManyPages
