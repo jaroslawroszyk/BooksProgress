@@ -99,7 +99,8 @@ void enterdata()
     std::cin >> p.pages;
     SaveToFile(p);
 }
-
+ 
+ //TODO: ZAPISYWANIE PO TYTULACH DO DANYCH PLIKÓW
 void menu()
 {
     Pages enter;
