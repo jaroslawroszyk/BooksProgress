@@ -18,7 +18,8 @@ struct HowManyPages
     int pages = 0;
     int suma = 0;
     void enterdata();
-    HowManyPages SaveToFile(HowManyPages savedate);
+    void enterTitle();
+    void SaveToFile(HowManyPages savedate,std::string tit);
 };
 
 void sum();
