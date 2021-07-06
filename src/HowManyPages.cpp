@@ -24,9 +24,9 @@ std::string HowManyPages::enterTitle() const
     return nameFileToSave;
 }
 
-void HowManyPages::SaveToFile(const HowManyPages &savedate, std::string &tit)
+void HowManyPages::SaveToFile(const HowManyPages &savedate, std::string &BookTitle)
 {
-    std::ofstream save(tit.c_str(), std::ios::app);
+    std::ofstream save(BookTitle.c_str(), std::ios::app);
 
     if (save.good())
     {
@@ -47,7 +47,7 @@ void HowManyPages::enterdata()
     SaveToFile(p, en);
 }
 
-void HowManyPages::sum()
+void HowManyPages::sum() const
 {
     HowManyPages p;
     std::string nameFileToSave;
