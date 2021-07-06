@@ -11,6 +11,6 @@ make
 
 ## Execute
 ```
-cd /bin
+cd bin
 ./howmanypages
 ```
