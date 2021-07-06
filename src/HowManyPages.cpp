@@ -5,9 +5,9 @@
 #include <cstdlib>
 #include <limits>
 #include <iostream>
-#include <dirent.h>
-#include <stdio.h>
-#include <string.h>
+
+#include <filesystem>
+
 std::istream &operator>>(std::istream &in, ProgramMode &enter)
 {
     int int_entry;
@@ -18,46 +18,44 @@ std::istream &operator>>(std::istream &in, ProgramMode &enter)
 std::string HowManyPages::enterTitle() const
 {
     std::string nameFileToSave;
-    std::cout << "Enter book's title: ";
+    std::cout << "Enter book's title(without extension): ";
     std::cin >> nameFileToSave;
-    nameFileToSave += ".txt";
+    // nameFileToSave += ".txt";
     return nameFileToSave;
-}
-
-void HowManyPages::SaveToFile(const HowManyPages &savedate, std::string &BookTitle)
-{
-    std::ofstream save(BookTitle.c_str(), std::ios::app);
-
-    if (save.good())
-    {
-        save << "Date: " << savedate.DateOfReading << ", number of pages: " << savedate.NumberOfPagesRead << '\n';
-    }
-    std::cout << "Data has been saved !\n";
-    save.close();
 }
 
 void HowManyPages::enterdata()
 {
-    HowManyPages p;
     std::string en = enterTitle();
     std::cout << "enter the day: ";
-    std::cin >> p.DateOfReading;
+    std::cin >> DateOfReading;
     std::cout << "how many pages: ";
-    std::cin >> p.NumberOfPagesRead;
-    SaveToFile(p, en);
+    std::cin >> NumberOfPagesRead;
+    SaveToFile(en);
+}
+
+void HowManyPages::SaveToFile(const std::string &BookTitle) const
+{
+    std::ofstream save(BookTitle.c_str(), std::ios::app);
+    if (save.good())
+    {
+        save << "Date: " << DateOfReading << ", number of pages: " << NumberOfPagesRead << '\n';
+    }
+    std::cout << "Data has been saved !\n";
+    save.close();
 }
 
 void HowManyPages::sum() const
 {
     HowManyPages p;
     std::string nameFileToSave;
-    std::cout << "Enter book's title: ";
+    std::cout << "Enter book's title(without extension): ";
     std::cin >> nameFileToSave;
     nameFileToSave += ".txt";
 
     std::string line;
     std::ifstream outFile;
-    outFile.open(nameFileToSave.c_str(), std::ios::app);
+    outFile.open(nameFileToSave.c_str(), std::ios::app | std::ios::in);
     if (outFile.is_open())
     {
         while (getline(outFile, line))
@@ -92,28 +90,40 @@ int calc()
 
 void showFilesTxt()
 {
-    DIR *d;
-    char *p1, *p2;
-    int ret;
-    struct dirent *dir;
-    d = opendir(".");
-    if (d)
+    for (auto &de : std::filesystem::directory_iterator("."))
     {
-        while ((dir = readdir(d)) != NULL)
+        if (de.is_regular_file() && de.path().string().ends_with(".txt"))
         {
-            p1 = strtok(dir->d_name, ".");
-            p2 = strtok(NULL, ".");
-            if (p2 != NULL)
-            {
-                ret = strcmp(p2, "txt");
-                if (ret == 0)
-                {
-                    std::cout << p1 << "\n";
-                }
-            }
+            // std::cout << de << '\n';     // or `de.path().string()
+            std::cout << de.path().filename() << '\n';
         }
-        closedir(d);
     }
+    //vesrion with dir if u want use that u must include:
+    // #include <dirent.h>
+    // #include <stdio.h>
+    // #include <string.h>
+    // DIR *d;
+    // char *p1, *p2;
+    // int ret;
+    // struct dirent *dir;
+    // d = opendir(".");
+    // if (d)
+    // {
+    //     while ((dir = readdir(d)) != NULL)
+    //     {
+    //         p1 = strtok(dir->d_name, ".");
+    //         p2 = strtok(NULL, ".");
+    //         if (p2 != NULL)
+    //         {
+    //             ret = strcmp(p2, "txt");
+    //             if (ret == 0)
+    //             {
+    //                 std::cout << p1 << "\n";
+    //             }
+    //         }
+    //     }
+    //     closedir(d);
+    // }
 }
 
 void menu()
