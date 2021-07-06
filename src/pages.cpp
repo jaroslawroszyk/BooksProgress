@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+void SaveToFile(HowManyPages savedate,std::string tit);
 
 std::istream &operator>>(std::istream &in, Pages &enter)
 {
@@ -10,23 +11,45 @@ std::istream &operator>>(std::istream &in, Pages &enter)
     return in;
 }
 
-HowManyPages SaveToFile(HowManyPages savedate)
+std::string enterTitle()
 {
-    //enter book's title
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
     std::cin >> nameFileToSave;
-    nameFileToSave += ".txt";
+    return nameFileToSave;
+}
 
+void enterdata()
+{
+    HowManyPages p;
+    std::string en = enterTitle();
+    std::cout << "enter the day: ";
+    std::cin >> p.date;
+    std::cout << "how many pages: ";
+    std::cin >> p.pages;
+    SaveToFile(p,en);
+    
+}
+
+void SaveToFile(HowManyPages savedate,std::string tit)
+{
+    //enter book's title
+    // std::string nameFileToSave;
+    // std::cout << "Enter book's title: ";
+    // std::cin >> nameFileToSave;
+    // nameFileToSave += ".txt";
+    // std::string n;
     //saving to a given data file
-    std::ofstream save(nameFileToSave.c_str(), std::ios::app);
+
+    // std::string sth = enterTitle();
+    std::ofstream save(tit.c_str(), std::ios::app);
     if (save.good())
     {
         save << "Date: " << savedate.date << ", number of pages: " << savedate.pages << '\n';
     }
     std::cout << "Data has been saved !\n";
     save.close();
-    return savedate;
+    // return savedate;
 }
 
 void sum()
@@ -36,7 +59,7 @@ void sum()
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
     std::cin >> nameFileToSave;
-    nameFileToSave += ".txt";
+    // nameFileToSave += ".txt";
 
     std::string line;
     std::ifstream outFile;
@@ -74,15 +97,7 @@ int calc()
     return calculate;
 }
 
-void enterdata()
-{
-    HowManyPages p;
-    std::cout << "enter the day: ";
-    std::cin >> p.date;
-    std::cout << "how many pages: ";
-    std::cin >> p.pages;
-    SaveToFile(p);
-}
+
 
 void menu()
 {
@@ -101,6 +116,7 @@ void menu()
         {
             system("clear");
             enterdata();
+            // enterTitle();
             break;
         }
         case Pages::p_Sum:
