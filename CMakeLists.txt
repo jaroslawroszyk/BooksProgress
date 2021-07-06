@@ -14,7 +14,7 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/include)
 add_executable(howamanypages
     src/main.cpp
-    src/pages.cpp
+    src/HowManyPages.cpp
 )
 
 set_target_properties(howamanypages
