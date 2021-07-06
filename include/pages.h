@@ -30,8 +30,8 @@ public:
     int SumPages = 0;
     void enterdata();
     void sum(); 
-    std::string  enterTitle();
-    void SaveToFile(HowManyPages savedate, std::string tit);
+    std::string  enterTitle() const;
+    static void SaveToFile(HowManyPages &savedate, std::string &tit);
     void menu();
 };
 
