@@ -21,15 +21,7 @@ std::string HowManyPages::enterTitle() const
 
 void HowManyPages::SaveToFile(HowManyPages &savedate, std::string &tit)
 {
-    //enter book's title
-    // std::string nameFileToSave;
-    // std::cout << "Enter book's title: ";
-    // std::cin >> nameFileToSave;
-    // nameFileToSave += ".txt";
-    // std::string n;
-    //saving to a given data file
 
-    // std::string sth = enterTitle();
     std::ofstream save(tit.c_str(), std::ios::app);
     if (save.good())
     {
