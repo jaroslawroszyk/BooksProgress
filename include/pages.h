@@ -11,17 +11,7 @@ enum class Pages
     p_Calculate,
     p_exit = 4,
 };
-/*
-struct HowManyPages
-{
-    std::string date;
-    int pages = 0;
-    int suma = 0;
-    void enterdata();
-    void enterTitle();
-    void SaveToFile(HowManyPages &savedate, std::string &tit);
-};
-*/
+
 class HowManyPages
 {
 public:
