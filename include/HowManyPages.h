@@ -17,3 +17,4 @@ public:
 void menu();
 int calc();
 
+//TODO: lista dostepnych plikow txt: ?????
