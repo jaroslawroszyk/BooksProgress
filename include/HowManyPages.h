@@ -11,10 +11,8 @@ public:
     void sum(); 
     std::string  enterTitle() const;
     static void SaveToFile(HowManyPages &savedate, std::string &tit);
-    
 };
 
 void menu();
 int calc();
 
-//TODO: lista dostepnych plikow txt: ?????
