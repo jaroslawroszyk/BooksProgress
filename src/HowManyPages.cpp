@@ -1,15 +1,17 @@
 #include "HowManyPages.h"
-#include "Pages.h"
+#include "ProgramMode.h"
 #include <fstream>
 #include <string>
 #include <cstdlib>
 #include <limits>
 #include <iostream>
-
-std::istream &operator>>(std::istream &in, Pages &enter)
+#include <dirent.h>
+#include <stdio.h>
+#include <string.h>
+std::istream &operator>>(std::istream &in, ProgramMode &enter)
 {
     int int_entry;
-    enter = (in >> int_entry) ? static_cast<Pages>(int_entry) : Pages::p_exit;
+    enter = (in >> int_entry) ? static_cast<ProgramMode>(int_entry) : ProgramMode::p_exit;
     return in;
 }
 
@@ -18,12 +20,14 @@ std::string HowManyPages::enterTitle() const
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
     std::cin >> nameFileToSave;
+    nameFileToSave += ".txt";
     return nameFileToSave;
 }
 
-void HowManyPages::SaveToFile(HowManyPages &savedate, std::string &tit)
+void HowManyPages::SaveToFile(const HowManyPages &savedate, std::string &tit)
 {
     std::ofstream save(tit.c_str(), std::ios::app);
+
     if (save.good())
     {
         save << "Date: " << savedate.DateOfReading << ", number of pages: " << savedate.NumberOfPagesRead << '\n';
@@ -49,7 +53,7 @@ void HowManyPages::sum()
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
     std::cin >> nameFileToSave;
-    // nameFileToSave += ".txt";
+    nameFileToSave += ".txt";
 
     std::string line;
     std::ifstream outFile;
@@ -86,50 +90,92 @@ int calc()
     return calculate;
 }
 
+void showFilesTxt()
+{
+    DIR *d;
+    char *p1, *p2;
+    int ret;
+    struct dirent *dir;
+    d = opendir(".");
+    if (d)
+    {
+        while ((dir = readdir(d)) != NULL)
+        {
+            p1 = strtok(dir->d_name, ".");
+            p2 = strtok(NULL, ".");
+            if (p2 != NULL)
+            {
+                ret = strcmp(p2, "txt");
+                if (ret == 0)
+                {
+                    std::cout << p1 << "\n";
+                }
+            }
+        }
+        closedir(d);
+    }
+}
+
 void menu()
 {
-    Pages enter;
+    ProgramMode enter;
     do
     {
         std::cout << "[1] Enter day and number of pages next enter book's title (automatic save)\n";
         std::cout << "[2] Add up the number of pages from a given book \n";
-        std::cout << "[3] Count how many pages you have read \n";
-        std::cout << "[4] Exit \n";
+        std::cout << "[3] Show available files \n";
+        std::cout << "[4] Count how many pages you have read \n";
+        std::cout << "[5] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
         HowManyPages p;
         switch (enter)
         {
-        case Pages::p_PagesDay:
+        case ProgramMode::p_PagesDay:
         {
-            system("clear");
+            std::system("clear");
+            std::cout << "Available files: " << std::endl;
+            showFilesTxt();
+            std::cout << std::endl
+                      << std::endl;
             p.enterdata();
             // enterTitle();
             break;
         }
-        case Pages::p_Sum:
+        case ProgramMode::p_Sum:
         {
-            system("clear");
+            std::system("clear");
+            std::cout << "Available files: " << std::endl;
+            showFilesTxt();
+            std::cout << std::endl;
             p.sum();
             break;
         }
-        case Pages::p_Calculate:
+        case ProgramMode::p_Show:
         {
-            system("clear");
+            std::system("clear");
+            std::cout << "Available files: " << std::endl;
+            showFilesTxt();
+            std::cout << std::endl;
+            break;
+        }
+        case ProgramMode::p_Calculate:
+        {
+            std::system("clear");
             std::cout << calc() << " pages\n";
             break;
         }
-        case Pages::p_exit:
+        case ProgramMode::p_exit:
         {
             std::cout << "See you tomorrow \n";
             break;
         }
         default:
         {
-            system("clear");
+            std::system("clear");
             std::cout << "nope \n";
             break;
         }
         }
-    } while (enter != Pages::p_exit);
+    } while (enter != ProgramMode::p_exit);
 }
