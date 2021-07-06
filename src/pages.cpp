@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-void SaveToFile(HowManyPages savedate,std::string tit);
+#include <cstdlib>
 
 std::istream &operator>>(std::istream &in, Pages &enter)
 {
@@ -11,7 +11,7 @@ std::istream &operator>>(std::istream &in, Pages &enter)
     return in;
 }
 
-std::string enterTitle()
+std::string HowManyPages::enterTitle()
 {
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
@@ -19,19 +19,7 @@ std::string enterTitle()
     return nameFileToSave;
 }
 
-void enterdata()
-{
-    HowManyPages p;
-    std::string en = enterTitle();
-    std::cout << "enter the day: ";
-    std::cin >> p.date;
-    std::cout << "how many pages: ";
-    std::cin >> p.pages;
-    SaveToFile(p,en);
-    
-}
-
-void SaveToFile(HowManyPages savedate,std::string tit)
+void HowManyPages::SaveToFile(HowManyPages savedate, std::string tit)
 {
     //enter book's title
     // std::string nameFileToSave;
@@ -45,17 +33,27 @@ void SaveToFile(HowManyPages savedate,std::string tit)
     std::ofstream save(tit.c_str(), std::ios::app);
     if (save.good())
     {
-        save << "Date: " << savedate.date << ", number of pages: " << savedate.pages << '\n';
+        save << "Date: " << savedate.DateOfReading << ", number of pages: " << savedate.NumberOfPagesRead << '\n';
     }
     std::cout << "Data has been saved !\n";
     save.close();
     // return savedate;
 }
 
-void sum()
+void HowManyPages::enterdata()
 {
     HowManyPages p;
+    std::string en = enterTitle();
+    std::cout << "enter the day: ";
+    std::cin >> p.DateOfReading;
+    std::cout << "how many pages: ";
+    std::cin >> p.NumberOfPagesRead;
+    SaveToFile(p, en);
+}
 
+void HowManyPages::sum()
+{
+    HowManyPages p;
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
     std::cin >> nameFileToSave;
@@ -70,8 +68,8 @@ void sum()
         {
             std::string token1 = line.substr(line.find(",") + 1, line.length() - 1);
             std::string token2 = token1.substr(token1.find(":") + 1, token1.length() - 1);
-            p.pages = std::stoi(token2);
-            p.suma += p.pages;
+            p.NumberOfPagesRead = std::stoi(token2);
+            p.SumPages += p.NumberOfPagesRead;
         }
         outFile.close();
     }
@@ -79,8 +77,7 @@ void sum()
     {
         std::cout << "Unable to open file! \n";
     }
-    std::cout << "From the book " << nameFileToSave << " the total number of pages read is: " << p.suma << std::endl; 
-    // std::cout << "Sum of pages: " << p.suma << std::endl;
+    std::cout << "From the book " << nameFileToSave << " the total number of pages read is: " << p.SumPages << std::endl;
 }
 
 int calc()
@@ -97,9 +94,7 @@ int calc()
     return calculate;
 }
 
-
-
-void menu()
+void HowManyPages::menu()
 {
     Pages enter;
     do
@@ -110,19 +105,20 @@ void menu()
         std::cout << "[4] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
+        HowManyPages p;
         switch (enter)
         {
         case Pages::p_PagesDay:
         {
             system("clear");
-            enterdata();
+            p.enterdata();
             // enterTitle();
             break;
         }
         case Pages::p_Sum:
         {
             system("clear");
-            sum();
+            p.sum();
             break;
         }
         case Pages::p_Calculate:
@@ -145,18 +141,3 @@ void menu()
         }
     } while (enter != Pages::p_exit);
 }
-
-// void EnterData()
-// {
-//     HowManyPages test;
-
-//     std::cout << "enter the day: ";
-//     std::cin >> test.date;
-//     std::cout << "how many pages: ";
-//     std::cin >> test.pages;
-// }
-
-// void show(HowManyPages show)
-// {
-//     std::cout<< show.date << " " << show.pages << "\n";
-// }
