@@ -11,7 +11,7 @@ std::istream &operator>>(std::istream &in, Pages &enter)
     return in;
 }
 
-std::string HowManyPages::enterTitle()
+std::string HowManyPages::enterTitle() const
 {
     std::string nameFileToSave;
     std::cout << "Enter book's title: ";
@@ -19,7 +19,7 @@ std::string HowManyPages::enterTitle()
     return nameFileToSave;
 }
 
-void HowManyPages::SaveToFile(HowManyPages savedate, std::string tit)
+void HowManyPages::SaveToFile(HowManyPages &savedate, std::string &tit)
 {
     //enter book's title
     // std::string nameFileToSave;
