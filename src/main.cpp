@@ -1,5 +1,5 @@
 #include "HowManyPages.h"
-#include "Pages.h"
+#include "ProgramMode.h"
 #include <iostream>
 
 int main()
