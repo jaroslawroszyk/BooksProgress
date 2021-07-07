@@ -20,7 +20,7 @@ std::string HowManyPages::enterTitle() const
     std::string nameFileToSave;
     std::cout << "Enter book's title(without extension): ";
     std::cin >> nameFileToSave;
-    // nameFileToSave += ".txt";
+    nameFileToSave += ".txt";
     return nameFileToSave;
 }
 
