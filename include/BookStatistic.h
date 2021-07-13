@@ -14,4 +14,4 @@ public:
 };
 
 void menu();
-int calc();
+
