@@ -128,9 +128,10 @@ void showFilesTxt()
 void deleteFile()
 {
     std::string NameFile;
-    std::cout << "Enter the name of the file you want to delete (with extension '.txt'): " << std::endl;
+    std::cout << "Enter the name of the file you want to delete(without extension .txt): " << std::endl;
 
     std::cin >> NameFile;
+    NameFile += ".txt";
     try
     {
         if (std::filesystem::remove(NameFile))
