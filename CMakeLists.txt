@@ -15,6 +15,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_executable(BookStatistic
     src/main.cpp
     src/BookStatistic.cpp
+    src/Functionality.cpp
 )
 
 set_target_properties(BookStatistic
