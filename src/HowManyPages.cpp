@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <limits>
 #include <iostream>
-
 #include <filesystem>
 
 std::istream &operator>>(std::istream &in, ProgramMode &enter)
@@ -126,6 +125,29 @@ void showFilesTxt()
     // }
 }
 
+void deleteFile()
+{
+    std::string NameFile;
+    std::cout << "Enter the name of the file you want to delete (with extension '.txt'): " << std::endl;
+
+    std::cin >> NameFile;
+    try
+    {
+        if (std::filesystem::remove(NameFile))
+        {
+            std::cout << "File " << NameFile << " deleted.\n";
+        }
+        else
+        {
+            std::cout << "file " << NameFile << " not found.\n";
+        }
+    }
+    catch (const std::filesystem::filesystem_error &err)
+    {
+        std::cout << " filesystem error: " << err.what() << "\n";
+    }
+}
+
 void menu()
 {
     ProgramMode enter;
@@ -134,8 +156,9 @@ void menu()
         std::cout << "[1] Enter day and number of pages next enter book's title (automatic save)\n";
         std::cout << "[2] Add up the number of pages from a given book \n";
         std::cout << "[3] Show available files \n";
-        std::cout << "[4] Count how many pages you have read \n";
-        std::cout << "[5] Exit \n";
+        std::cout << "[4] Delete file\n";
+        std::cout << "[5] Count how many pages you have read \n";
+        std::cout << "[6] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
         HowManyPages p;
@@ -167,6 +190,15 @@ void menu()
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
             std::cout << std::endl;
+            break;
+        }
+        case ProgramMode::p_delete:
+        {
+            std::system("clear");
+            std::cout << "Available files: " << std::endl;
+            showFilesTxt();
+            std::cout << std::endl;
+            deleteFile();
             break;
         }
         case ProgramMode::p_Calculate:
