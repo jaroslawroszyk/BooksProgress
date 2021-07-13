@@ -12,5 +12,5 @@ make
 ## Execute
 ```
 cd bin
-./howmanypages
+./BookStatistic
 ```
