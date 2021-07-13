@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(howamanypages VERSION 1.0.0)
+project(BookStatistic VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 20)
 
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE MATCHES "Release")
@@ -12,12 +12,12 @@ else()
 endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
-add_executable(howamanypages
+add_executable(BookStatistic
     src/main.cpp
-    src/HowManyPages.cpp
+    src/BookStatistic.cpp
 )
 
-set_target_properties(howamanypages
+set_target_properties(BookStatistic
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
@@ -26,7 +26,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     if(MSVC)
         #ToDo: add flags for msfc
     else()
-        target_compile_options(howamanypages
+        target_compile_options(BookStatistic
                 PUBLIC
                 -O3 -g3 -Wall -Wextra -pedantic
             )
@@ -35,7 +35,7 @@ else()
     if(MSVC)
         #ToDo: add flags for msfc
     else()
-        target_compile_options(howamanypages
+        target_compile_options(BookStatistic
                 PUBLIC
                 -O3 -Wall -Wextra -pedantic
             )
