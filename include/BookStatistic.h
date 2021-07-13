@@ -13,5 +13,3 @@ public:
     void SaveToFile(const std::string &BookTitle) const;
 };
 
-void menu();
-
