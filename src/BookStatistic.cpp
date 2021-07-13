@@ -19,6 +19,8 @@ std::string BookStatistic::enterTitle() const
     std::string nameFileToSave;
     std::cout << "Enter book's title(without extension): ";
     std::cin >> nameFileToSave;
+    // std::cin.ignore(); the version with the entire title of the book
+    // std::getline(std::cin,nameFileToSave);
     nameFileToSave += ".txt";
     return nameFileToSave;
 }
@@ -149,6 +151,20 @@ void deleteFile()
     }
 }
 
+void showContent()
+{
+    std::string nameFile;
+    std::cout << "Enter the name of the file you want to see the contents(without extension): ";
+    std::cin >> nameFile;
+    nameFile += ".txt";
+    std::ifstream Content(nameFile);
+    if(Content.is_open())
+    {
+        std::cout << Content.rdbuf();
+    }
+    Content.close();
+}
+
 void menu()
 {
     ProgramMode enter;
@@ -157,9 +173,10 @@ void menu()
         std::cout << "[1] Enter day and number of pages next enter book's title (automatic save)\n";
         std::cout << "[2] Add up the number of pages from a given book \n";
         std::cout << "[3] Show available files \n";
-        std::cout << "[4] Delete file\n";
-        std::cout << "[5] Count how many pages you have read \n";
-        std::cout << "[6] Exit \n";
+        std::cout << "[4] Show the contents of the file \n";
+        std::cout << "[5] Delete file\n";
+        std::cout << "[6] Count how many pages you have read \n";
+        std::cout << "[7] Exit \n";
         std::cout << "Choose: ";
         std::cin >> enter;
         BookStatistic p;
@@ -173,7 +190,6 @@ void menu()
             std::cout << std::endl
                       << std::endl;
             p.enterdata();
-            // enterTitle();
             break;
         }
         case ProgramMode::p_Sum:
@@ -191,6 +207,15 @@ void menu()
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
             std::cout << std::endl;
+            break;
+        }
+        case ProgramMode::p_ShowTheConent:
+        {
+            std::system("clear");
+            std::cout << "Available files: " << std::endl;
+            showFilesTxt();
+            std::cout << std::endl;
+            showContent();
             break;
         }
         case ProgramMode::p_delete:
