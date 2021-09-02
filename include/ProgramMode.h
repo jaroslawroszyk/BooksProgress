@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-
+using namespace std;
 enum class ProgramMode
 {
     p_PagesDay = 1,
