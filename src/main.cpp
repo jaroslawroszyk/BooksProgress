@@ -1,9 +1,9 @@
-#include "BookStatistic.h"
-#include "ProgramMode.h"
-#include "Functionality.h"
+#include "Program.hpp"
 #include <iostream>
 
 int main()
 {
-    menu();
+    Program program;
+    program.run();
+    return 0;
 }

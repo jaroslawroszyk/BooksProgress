@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.17...3.25)
 
 project(BookStatistic VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 20)
@@ -15,7 +15,8 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_executable(BookStatistic
     src/main.cpp
     src/BookStatistic.cpp
-    src/Functionality.cpp
+    src/Program.cpp
+    src/ProgramMode.cpp
 )
 
 set_target_properties(BookStatistic
