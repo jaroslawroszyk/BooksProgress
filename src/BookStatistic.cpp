@@ -59,7 +59,7 @@ auto BookStatistic::calculateTotalPagesRead() const -> void
             }
         }
         outFile.close();
-        std::cout << "From the book " << nameFileToSave << " the total number of pages read is: " << p.sumPages << std::endl;
+        std::cout << "From the book " << nameFileToSave << " the total number of pages read is: " << bookStatistic.sumPages << std::endl;
     }
     else
     {
