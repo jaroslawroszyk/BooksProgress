@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 auto BookStatistic::enterTitle() const -> std::string
 {
@@ -47,14 +48,24 @@ BookStatistic BookStatistic::calculateTotalPagesRead() const
 
     if (outFile.is_open())
     {
-        while (getline(outFile, line))
+        while (std::getline(outFile, line))
         {
-            size_t pos = line.find(":");
+            size_t pos = line.find("number of pages:");
             if (pos != std::string::npos)
             {
-                std::string token = line.substr(pos + 1);
-                bookStat.numberOfPagesRead = std::stoi(token);
-                bookStat.sumPages += bookStat.numberOfPagesRead;
+                std::string token = line.substr(pos + 16);
+                std::istringstream iss(token);
+                int numberOfPages = 0;
+                iss >> numberOfPages;
+                if (iss.fail())
+                {
+                    std::cout << "Failed to parse number of pages from token: " << token << std::endl;
+                }
+                else
+                {
+                    bookStat.numberOfPagesRead = numberOfPages;
+                    bookStat.sumPages += bookStat.numberOfPagesRead;
+                }
             }
         }
         outFile.close();
