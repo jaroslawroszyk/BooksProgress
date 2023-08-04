@@ -15,5 +15,4 @@ public:
     auto close() -> void override;
     std::istream& getline(std::string&) override;
     std::istream& readLine(std::string&) override;
-
 };

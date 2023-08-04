@@ -11,7 +11,6 @@ private:
 
     auto enterTitle() const->std::string;
     auto saveToFile(const std::string& BookTitle) const -> void;
-
 public:
     BookStatistic() = default;
     void enterData() override;

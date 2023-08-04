@@ -120,9 +120,7 @@ void Program::run()
             showFilesTxt();
             std::cout << std::endl;
 
-
             BookStatistic bookStat = bookStats->calculateTotalPagesRead();
-
             std::cout << bookStat.getSumPages() << " pages have been read." << std::endl;
             break;
         }
