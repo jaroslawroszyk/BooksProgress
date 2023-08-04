@@ -1,7 +1,8 @@
 #pragma once
+#include "IBookStatistic.hpp"
 #include <iostream>
 
-class BookStatistic
+class BookStatistic : public IBookStatistic
 {
 private:
     std::string dateOfReading;
@@ -9,10 +10,11 @@ private:
     int sumPages = 0;
 
     auto enterTitle() const->std::string;
-    auto saveToFile(const std::string&) const -> void;
+    auto saveToFile(const std::string& BookTitle) const -> void;
 
 public:
     BookStatistic() = default;
-    auto enterData() -> void;
-    auto calculateTotalPagesRead() const -> void;
+    void enterData() override;
+    BookStatistic calculateTotalPagesRead() const override;
+    int getSumPages() const;
 };
