@@ -1,10 +1,14 @@
 #include "BookStatistic.hpp"
 #include "ProgramMode.hpp"
 #include "Program.hpp"
-#include <cstdlib>
 #include <iostream>
 #include <filesystem>
-#include <fstream>
+#include <memory>
+
+Program::Program(std::shared_ptr<IBookStatistic> stats, std::shared_ptr<IFile> file)
+    : bookStats(stats), file(file)
+{
+}
 
 auto Program::calculatePages() -> int
 {
@@ -16,7 +20,7 @@ auto Program::calculatePages() -> int
     std::cout << "Enter the last page you read today: ";
     std::cin >> endPage;
     calculate = endPage - startingPage;
-    std::cout << "you have read: ";
+    std::cout << "You have read: ";
     return calculate;
 }
 
@@ -45,7 +49,7 @@ auto Program::showFilesTxt() -> void
 auto Program::deleteFile() -> void
 {
     std::string nameFile{};
-    std::cout << "Enter the name of the file you want to delete(without extension .txt): " << std::endl;
+    std::cout << "Enter the name of the file you want to delete (without extension .txt): " << std::endl;
 
     std::cin >> nameFile;
     nameFile += ".txt";
@@ -57,19 +61,19 @@ auto Program::deleteFile() -> void
         }
         else
         {
-            std::cout << "file " << nameFile << " not found.\n";
+            std::cout << "File " << nameFile << " not found.\n";
         }
     }
     catch (const std::filesystem::filesystem_error& err)
     {
-        std::cout << " filesystem error: " << err.what() << "\n";
+        std::cout << "Filesystem error: " << err.what() << "\n";
     }
 }
 
 auto Program::showContent() -> void
 {
     std::string nameFile{};
-    std::cout << "Enter the name of the file you want to see the contents(without extension): ";
+    std::cout << "Enter the name of the file you want to see the contents (without extension): ";
     std::cin >> nameFile;
     nameFile += ".txt";
     std::ifstream contentOfFile(nameFile);
@@ -91,7 +95,7 @@ auto showMenu() -> void
     std::cout << "[7] Exit \n";
 }
 
-auto Program::run() -> void
+void Program::run()
 {
     ProgramMode programMode;
     do
@@ -102,34 +106,32 @@ auto Program::run() -> void
 
         switch (programMode)
         {
-        case ProgramMode::p_numberOfPagesPerDay:
-        {
+        case ProgramMode::p_numberOfPagesPerDay: {
             clearConsole();
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
             std::cout << std::endl << std::endl;
-            bookStats.enterData();
+            bookStats->enterData();
             break;
         }
-        case ProgramMode::p_sumOfReadPagesInBook:
-        {
+        case ProgramMode::p_sumOfReadPagesInBook: {
             clearConsole();
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
             std::cout << std::endl;
-            bookStats.calculateTotalPagesRead();
+
+            BookStatistic bookStat = bookStats->calculateTotalPagesRead();
+            std::cout << bookStat.getSumPages() << " pages have been read." << std::endl;
             break;
         }
-        case ProgramMode::p_showAvailableFiles:
-        {
+        case ProgramMode::p_showAvailableFiles: {
             clearConsole();
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
             std::cout << std::endl;
             break;
         }
-        case ProgramMode::p_showContentOfFile:
-        {
+        case ProgramMode::p_showContentOfFile: {
             clearConsole();
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
@@ -137,8 +139,7 @@ auto Program::run() -> void
             showContent();
             break;
         }
-        case ProgramMode::p_deleteFile:
-        {
+        case ProgramMode::p_deleteFile: {
             clearConsole();
             std::cout << "Available files: " << std::endl;
             showFilesTxt();
@@ -146,21 +147,18 @@ auto Program::run() -> void
             deleteFile();
             break;
         }
-        case ProgramMode::p_calculatePages:
-        {
+        case ProgramMode::p_calculatePages: {
             clearConsole();
             std::cout << calculatePages() << " pages\n";
             break;
         }
-        case ProgramMode::p_exit:
-        {
-            std::cout << "See you tomorrow \n";
+        case ProgramMode::p_exit: {
+            std::cout << "See you tomorrow\n";
             break;
         }
-        default:
-        {
+        default: {
             clearConsole();
-            std::cout << "Invalid choice \n";
+            std::cout << "Invalid choice\n";
             break;
         }
         }

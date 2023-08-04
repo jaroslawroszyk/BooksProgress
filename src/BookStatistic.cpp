@@ -1,9 +1,7 @@
 #include "BookStatistic.hpp"
+#include <iostream>
 #include <fstream>
 #include <string>
-#include <cstdlib>
-#include <limits>
-#include <iostream>
 
 auto BookStatistic::enterTitle() const -> std::string
 {
@@ -14,7 +12,7 @@ auto BookStatistic::enterTitle() const -> std::string
     return nameFileToSave;
 }
 
-auto BookStatistic::enterData() -> void
+void BookStatistic::enterData()
 {
     std::string title = enterTitle();
     std::cout << "Enter the day: ";
@@ -24,28 +22,29 @@ auto BookStatistic::enterData() -> void
     saveToFile(title);
 }
 
-auto BookStatistic::saveToFile(const std::string& BookTitle) const -> void
+void BookStatistic::saveToFile(const std::string& BookTitle) const
 {
-    std::ofstream save(BookTitle.c_str(), std::ios::app);
-    if (save.good())
+    std::ofstream file(BookTitle.c_str(), std::ios::app);
+    if (file.good())
     {
-        save << "Date: " << dateOfReading << ", number of pages: " << numberOfPagesRead << '\n';
+        file << "Date: " << dateOfReading << ", number of pages: " << numberOfPagesRead << '\n';
         std::cout << "Data has been saved!\n";
     }
     else
     {
         std::cout << "Unable to open file!\n";
     }
-    save.close();
+    file.close();
 }
 
-auto BookStatistic::calculateTotalPagesRead() const -> void
+BookStatistic BookStatistic::calculateTotalPagesRead() const
 {
-    BookStatistic bookStatistic;
+    BookStatistic bookStat{};
     std::string nameFileToSave = enterTitle();
 
     std::string line{};
     std::ifstream outFile(nameFileToSave);
+
     if (outFile.is_open())
     {
         while (getline(outFile, line))
@@ -54,15 +53,20 @@ auto BookStatistic::calculateTotalPagesRead() const -> void
             if (pos != std::string::npos)
             {
                 std::string token = line.substr(pos + 1);
-                bookStatistic.numberOfPagesRead = std::stoi(token);
-                bookStatistic.sumPages += bookStatistic.numberOfPagesRead;
+                bookStat.numberOfPagesRead = std::stoi(token);
+                bookStat.sumPages += bookStat.numberOfPagesRead;
             }
         }
         outFile.close();
-        std::cout << "From the book " << nameFileToSave << " the total number of pages read is: " << bookStatistic.sumPages << std::endl;
     }
     else
     {
         std::cout << "Unable to open file!\n";
     }
+    return bookStat;
+}
+
+int BookStatistic::getSumPages() const
+{
+    return sumPages;
 }
