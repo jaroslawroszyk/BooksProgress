@@ -44,5 +44,29 @@ TEST_F(BookStatisticTest, CalculateTotalPagesRead)
     BookStatistic result = bookStat.calculateTotalPagesRead(fileName);
 
     EXPECT_EQ(result.getSumPages(), 80);
+}
 
+TEST_F(BookStatisticTest, SaveToFile)
+{
+    std::string testFileName = "test_save_data.txt";
+    std::remove(testFileName.c_str());
+
+    bookStat.setDateOfReading("2023-08-12");
+    bookStat.setNumberOfPagesRead(25);
+    bookStat.saveToFile(testFileName);
+
+    std::remove(testFileName.c_str());
+    std::ifstream testFile(testFileName);
+    std::string line;
+
+    if (testFile.is_open())
+    {
+        std::getline(testFile, line);
+        EXPECT_EQ(line, "Date: 2023-08-12, number of pages: 25");
+        testFile.close();
+    }
+    else
+    {
+        FAIL() << "Failed to open test file: " << testFileName;
+    }
 }

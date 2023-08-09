@@ -10,7 +10,5 @@ public:
 
     virtual ~IBookStatistic() {}
     virtual void enterData() = 0;
-    // virtual BookStatistic calculateTotalPagesRead() const = 0;
     virtual BookStatistic calculateTotalPagesRead(const std::string&) const = 0;
-
 };

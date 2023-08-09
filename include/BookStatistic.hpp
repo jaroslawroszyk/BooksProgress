@@ -11,11 +11,12 @@ private:
 
     auto enterTitle() const->std::string;
 public:
-    auto saveToFile(const std::string& BookTitle) const -> void;
     BookStatistic() = default;
     void enterData() override;
+    auto saveToFile(const std::string& BookTitle) const -> void;
     BookStatistic calculateTotalPagesRead(const std::string& fileName) const override;
-
-
     int getSumPages() const;
+
+    void setDateOfReading(const std::string& dateReading) { dateOfReading = dateReading; }
+    void setNumberOfPagesRead(int numberOfPages) { numberOfPagesRead = numberOfPages; }
 };
