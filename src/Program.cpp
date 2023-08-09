@@ -120,10 +120,16 @@ void Program::run()
             showFilesTxt();
             std::cout << std::endl;
 
-            BookStatistic bookStat = bookStats->calculateTotalPagesRead();
+            std::string fileName;
+            std::cout << "Enter the name of the file: ";
+            std::cin >> fileName;
+            fileName += ".txt";
+
+            BookStatistic bookStat = bookStats->calculateTotalPagesRead(fileName);
             std::cout << bookStat.getSumPages() << " pages have been read." << std::endl;
             break;
         }
+
         case ProgramMode::p_showAvailableFiles: {
             clearConsole();
             std::cout << "Available files: " << std::endl;

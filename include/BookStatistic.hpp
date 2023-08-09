@@ -10,10 +10,12 @@ private:
     int sumPages = 0;
 
     auto enterTitle() const->std::string;
-    auto saveToFile(const std::string& BookTitle) const -> void;
 public:
+    auto saveToFile(const std::string& BookTitle) const -> void;
     BookStatistic() = default;
     void enterData() override;
-    BookStatistic calculateTotalPagesRead() const override;
+    BookStatistic calculateTotalPagesRead(const std::string& fileName) const override;
+
+
     int getSumPages() const;
 };

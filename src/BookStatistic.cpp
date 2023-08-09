@@ -38,10 +38,9 @@ void BookStatistic::saveToFile(const std::string& BookTitle) const
     file.close();
 }
 
-BookStatistic BookStatistic::calculateTotalPagesRead() const
+BookStatistic BookStatistic::calculateTotalPagesRead(const std::string& nameFileToSave) const
 {
     BookStatistic bookStat{};
-    std::string nameFileToSave = enterTitle();
 
     std::string line{};
     std::ifstream outFile(nameFileToSave);
