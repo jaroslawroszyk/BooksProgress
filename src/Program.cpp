@@ -5,8 +5,9 @@
 #include <filesystem>
 #include <memory>
 
-Program::Program(std::shared_ptr<IBookStatistic> stats, std::shared_ptr<IFile> file)
-    : bookStats(stats), file(file)
+Program::Program(std::shared_ptr<IBookStatistic> stats)//, std::shared_ptr<IFile> file)
+    : bookStats(stats)
+    // , file(file)
 {
 }
 
@@ -60,20 +61,10 @@ auto showMenu() -> void
 auto Program::handleNumberOfPagesPerDay() -> void
 {
     clearConsole();
-    std::cout << "Enter the number of pages you read today: ";
-    int pagesRead{ 0 };
-    std::cin >> pagesRead;
-
-    std::string title{};
-    std::cout << "Enter the title of the book: ";
-    std::cin.ignore();
-    std::getline(std::cin, title);
-
-    std::ofstream outFile(title + ".txt");
-    outFile << pagesRead;
-    outFile.close();
-
-    std::cout << "Data saved." << std::endl;
+    std::cout << "Available files: " << std::endl;
+    showFilesTxt();
+    std::cout << std::endl << std::endl;
+    bookStats->enterData();
 }
 
 auto Program::handleSumOfReadPagesInBook()-> void
@@ -81,24 +72,15 @@ auto Program::handleSumOfReadPagesInBook()-> void
     clearConsole();
     std::cout << "Available files: " << std::endl;
     showFilesTxt();
+    std::cout << std::endl;
+
+    std::string fileName;
     std::cout << "Enter the name of the file: ";
-    std::string fileName{};
-    std::cin.ignore();
-    std::getline(std::cin, fileName);
+    std::cin >> fileName;
     fileName += ".txt";
 
-    std::ifstream inFile(fileName);
-    if (!inFile.is_open())
-    {
-        std::cout << "File not found." << std::endl;
-        return;
-    }
-
-    int sum = 0;
-    inFile >> sum;
-    inFile.close();
-
-    std::cout << "Total pages read from " << fileName << ": " << sum << std::endl;
+    BookStatistic bookStat = bookStats->calculateTotalPagesRead(fileName);
+    std::cout << bookStat.getSumPages() << " pages have been read." << std::endl;
 }
 
 auto Program::handleShowAvailableFiles()-> void

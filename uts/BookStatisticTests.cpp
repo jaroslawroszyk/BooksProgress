@@ -68,4 +68,5 @@ TEST_F(BookStatisticTest, SaveToFile)
     {
         FAIL() << "Failed to open test file: " << testFileName;
     }
+    std::remove(testFileName.c_str());
 }

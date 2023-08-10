@@ -1,14 +1,12 @@
 #pragma once
 #include "IProgram.hpp"
 #include "IBookStatistic.hpp"
-#include "IFile.hpp"
 #include <memory>
 
 class Program : public IProgram
 {
 private:
     std::shared_ptr<IBookStatistic> bookStats;
-    std::shared_ptr<IFile> file;
 
     auto clearConsole() -> void;
     auto showFilesTxt() -> void;
@@ -22,7 +20,6 @@ private:
     void handleCalculatePages();
 
 public:
-    Program(std::shared_ptr<IBookStatistic>, std::shared_ptr<IFile>);
-
+    Program(std::shared_ptr<IBookStatistic>);
     auto run() -> void override;
 };

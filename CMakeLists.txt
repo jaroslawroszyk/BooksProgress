@@ -7,8 +7,7 @@ set(FLAGS -Wall -Wextra -Werror -Wpedantic)
 set(SOURCES
     src/BookStatistic.cpp
     src/Program.cpp
-    src/ProgramMode.cpp
-    src/File.cpp)
+    src/ProgramMode.cpp)
 
 set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
 
