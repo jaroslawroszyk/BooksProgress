@@ -10,11 +10,16 @@ private:
     std::shared_ptr<IBookStatistic> bookStats;
     std::shared_ptr<IFile> file;
 
-    auto calculatePages() -> int;
     auto clearConsole() -> void;
     auto showFilesTxt() -> void;
-    auto deleteFile() -> void;
     auto showContent() -> void;
+
+    void handleNumberOfPagesPerDay();
+    void handleSumOfReadPagesInBook();
+    void handleShowAvailableFiles();
+    void handleShowContentOfFile();
+    void handleDeleteFile();
+    void handleCalculatePages();
 
 public:
     Program(std::shared_ptr<IBookStatistic>, std::shared_ptr<IFile>);

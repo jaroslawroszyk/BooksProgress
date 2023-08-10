@@ -30,7 +30,6 @@ TEST_F(FileTest, ContentOfTheFileMatch)
 
     std::string line{};
     file.readLine(line);
-    std::cout << "Jr : " << line << std::endl;
     EXPECT_EQ(line, "Test content");
 }
 

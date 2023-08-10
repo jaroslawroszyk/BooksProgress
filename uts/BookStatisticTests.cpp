@@ -55,7 +55,6 @@ TEST_F(BookStatisticTest, SaveToFile)
     bookStat.setNumberOfPagesRead(25);
     bookStat.saveToFile(testFileName);
 
-    std::remove(testFileName.c_str());
     std::ifstream testFile(testFileName);
     std::string line;
 
