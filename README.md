@@ -1,6 +1,3 @@
-Oczywiście, oto przykład "README.md" dla Twojego projektu "BooksProgress":
-
-```markdown
 # BooksProgress
 
 BooksProgress is a simple command-line program for tracking and managing your reading progress.
@@ -54,4 +51,3 @@ cd bin
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
