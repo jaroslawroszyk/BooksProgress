@@ -5,9 +5,7 @@
 #include <filesystem>
 #include <memory>
 
-Program::Program(std::shared_ptr<IBookStatistic> stats)//, std::shared_ptr<IFile> file)
-    : bookStats(stats)
-    // , file(file)
+Program::Program(std::shared_ptr<IBookStatistic> stats) : bookStats(stats)
 {
 }
 
